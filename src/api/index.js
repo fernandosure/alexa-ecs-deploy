@@ -50,7 +50,7 @@ alexaApp.express({
 
     // sets up a GET route when set to true. This is handy for testing in
     // development, but not recommended for production. disabled by default
-    debug: true
+    debug: false
 });
 
 alexaApp.launch(function(request, response) {
