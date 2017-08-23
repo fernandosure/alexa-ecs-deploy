@@ -1,0 +1,24 @@
+<h2>AWS Configuration Page</h2>
+<p>You need to provide your AWS AccessKeys to deploy services using the Alexa Skill</p>
+
+
+<form>
+    <div class="form-group">
+        <label>AccessKey</label>
+        <input class="form-control" ng-model="awsconfigs.aws_access_key_id">
+    </div>
+    <div class="form-group">
+        <label>SecretKey</label>
+        <input class="form-control" ng-model="awsconfigs.aws_secret_access_key">
+    </div>
+
+    <div class="form-group">
+        <label>Default Region</label>
+        <input class="form-control" ng-model="awsconfigs.aws_default_region">
+    </div>
+
+
+    <button class="btn btn-default" ng-click="saveConfigs()">Submit</button>
+</form>
+
+<h2>{{ message }}</h2>

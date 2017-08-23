@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Authorization</title>
+    <base href="/">
+    <!-- Viewport settings-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!--styles-->
+    <link rel="stylesheet" href="assets/build/css/styles.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+
+    <!-- scripts -->
+    <script src="assets/build/js/header.min.js"></script>
+
+
+</head>
+<body>
+<div ng-app="app">
+
+    <navbar></navbar>
+
+    <div class="container">
+        <ui-view></ui-view>
+    </div>
+
+</div>
+<!--scripts-->
+<script src="assets/build/js/footer.min.js"></script>
+<script type="text/javascript" src="app/configs.js"></script>
+<script type="text/javascript" src="app/functions.js"></script>
+
+<!--modules first-->
+<script type="text/javascript" src="app/modules/profile/index.js"></script>
+
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/navbar/navbar.directive.js"></script>
+<script type="text/javascript" src="app/home/home.controller.js"></script>
+<script type="text/javascript" src="app/awsconfig/awsconfig.controller.js"></script>
+<!--<script type="text/javascript" src="app/profile/profile.controller.js"></script>-->
+
+<script type="text/javascript" src="app/ecs/ecs.controller.js"></script>
+<script type="text/javascript" src="app/callback/callback.controller.js"></script>
+<script type="text/javascript" src="app/auth/auth.service.js"></script>
+</body>
+</html>
