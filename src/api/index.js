@@ -26,8 +26,46 @@ var jwtCheck = jwt({
     algorithms: ['RS256']
 });
 
+
 router.use(cors())
 router.use(morgan('combined'))
+
+
+// setup the alexa app and attach it to express before anything else
+alexaApp.express({
+    router: router,
+    // verifies requests come from amazon alexa. Must be enabled for production.
+    // You can disable this if you're running a dev environment and want to POST
+    // things to test behavior. enabled by default.
+    checkCert: false,
+
+    // sets up a GET route when set to true. This is handy for testing in
+    // development, but not recommended for production. disabled by default
+    debug: false
+});
+
+alexaApp.launch(function(request, response) {
+    response.say("You launched the app!");
+});
+
+alexaApp.intent("DeployIntent",
+    {
+        "slots": {
+            "Service": "Service",
+            "Environment": "Environment"
+        }
+    },
+    function(request, response) {
+        var service = request.slot("Service");
+        var environment = request.slot("Environment");
+
+        var message = util.format('Deploying %s to %s',service,environment)
+        console.log(message);
+        response.say(message);
+    }
+);
+
+
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 // router.use(bodyParser.json({
@@ -40,42 +78,6 @@ router.use(bearerToken());
 
 
 
-// setup the alexa app and attach it to express before anything else
-alexaApp.express({
-    router: router,
-    // verifies requests come from amazon alexa. Must be enabled for production.
-    // You can disable this if you're running a dev environment and want to POST
-    // things to test behavior. enabled by default.
-    checkCert: true,
-
-    // sets up a GET route when set to true. This is handy for testing in
-    // development, but not recommended for production. disabled by default
-    debug: false
-});
-
-alexaApp.launch(function(request, response) {
-    response.say("You launched the app!");
-});
-
-alexaApp.intent("DeployIntent", {
-        "slots": {
-            "Service": "Service",
-            "Environment": "Environment"
-        },
-        "utterances": [
-            "{-|Service} to {-|Environment}",
-            "{-|Service} into {-|Environment}"
-        ]
-    },
-    function(request, response) {
-        var service = request.slot("Service");
-        var environment = request.slot("environment");
-
-        var message = util.format('Deploying %s to %s',service,environment)
-        console.log(message);
-        response.say(message);
-    }
-);
 
 
 //
